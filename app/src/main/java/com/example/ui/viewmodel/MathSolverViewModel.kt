@@ -13,7 +13,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.data.local.MathDatabase
 import com.example.data.local.SavedSolutionEntity
 import com.example.data.model.MathSolution
-import com.example.data.remote.FirebaseAiMathService
 import com.example.data.repository.MathRepository
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -46,8 +45,7 @@ class MathSolverViewModel(application: Application) : AndroidViewModel(applicati
 
     init {
         val database = MathDatabase.getDatabase(application)
-        val aiService = FirebaseAiMathService()
-        repository = MathRepository(aiService, database.savedSolutionDao())
+        repository = MathRepository(database.savedSolutionDao())
     }
 
     // Input States

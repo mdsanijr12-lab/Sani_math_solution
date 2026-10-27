@@ -15,7 +15,6 @@ import com.example.ui.screens.MathSolverScreen
 import com.example.ui.theme.MyApplicationTheme
 import com.example.ui.viewmodel.MathSolverViewModel
 import com.example.ui.viewmodel.ThemeMode
-import com.example.util.configureAppCheck
 
 class MainActivity : ComponentActivity() {
 
@@ -23,10 +22,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // STEP 1: Mandatory App Check initialization with launch intent before any UI or Firebase operations
-        configureAppCheck(this, intent)
-
         enableEdgeToEdge()
 
         setContent {

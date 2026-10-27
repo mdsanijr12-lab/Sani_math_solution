@@ -5,13 +5,12 @@ import com.example.data.local.SavedSolutionDao
 import com.example.data.local.SavedSolutionEntity
 import com.example.data.model.MathSolution
 import com.example.data.model.SolutionStep
-import com.example.data.remote.FirebaseAiMathService
+import com.example.data.engine.SmartMathSolverEngine
 import kotlinx.coroutines.flow.Flow
 import org.json.JSONArray
 import org.json.JSONObject
 
 class MathRepository(
-    private val aiService: FirebaseAiMathService,
     private val savedSolutionDao: SavedSolutionDao
 ) {
 
@@ -27,14 +26,8 @@ class MathRepository(
             return preset.solution
         }
 
-        // Call server-side Firebase AI Logic
-        return try {
-            aiService.solveMathProblem(cleanQuestion, imageBitmap)
-        } catch (e: Exception) {
-            // If offline or AI error, check if question can be solved by local math patterns
-            val localSolution = trySolveLocally(cleanQuestion)
-            localSolution ?: throw e
-        }
+        // Solve problem using the robust SmartMathSolverEngine
+        return SmartMathSolverEngine.solve(cleanQuestion, imageBitmap)
     }
 
     val historySolutions: Flow<List<SavedSolutionEntity>> = savedSolutionDao.getAllSolutions()
