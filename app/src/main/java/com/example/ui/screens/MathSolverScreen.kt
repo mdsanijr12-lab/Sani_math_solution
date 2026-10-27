@@ -1085,8 +1085,9 @@ fun ShortAnswerCard(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Spacer(modifier = Modifier.height(6.dp))
-                    KaTeXMathView(
-                        latex = shortAnswer.ifBlank { finalAnswer },
+                    FormattedMathText(
+                        text = shortAnswer.ifBlank { finalAnswer },
+                        isHighlight = true,
                         fontSizeSp = 20
                     )
                 }
@@ -1248,8 +1249,9 @@ fun LongAnswerCard(
                         )
                     }
                     Spacer(modifier = Modifier.height(6.dp))
-                    KaTeXMathView(
-                        latex = solution.finalAnswer.ifBlank { solution.shortAnswer },
+                    FormattedMathText(
+                        text = solution.finalAnswer.ifBlank { solution.shortAnswer },
+                        isHighlight = true,
                         fontSizeSp = 18
                     )
                 }

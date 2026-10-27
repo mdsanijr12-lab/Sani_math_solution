@@ -128,22 +128,23 @@ fun KaTeXMathView(
 fun FormattedMathText(
     text: String,
     modifier: Modifier = Modifier,
-    isHighlight: Boolean = false
+    isHighlight: Boolean = false,
+    fontSizeSp: Int = if (isHighlight) 18 else 15
 ) {
-    // Check if the text contains LaTeX symbols or can be rendered with KaTeX
-    val hasLatex = text.contains("\\") || text.contains("^") || text.contains("_") || text.contains("{")
+    val hasBengali = text.any { it in '\u0980'..'\u09FF' }
+    val hasLatex = (text.contains("\\") || text.contains("^") || text.contains("_") || text.contains("{")) && !hasBengali
 
     if (hasLatex && text.length < 250) {
-        KaTeXMathView(latex = text, modifier = modifier)
+        KaTeXMathView(latex = text, modifier = modifier, fontSizeSp = fontSizeSp)
     } else {
         // Native Compose math text with crisp typography
         Text(
             text = text,
             color = if (isHighlight) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
             fontWeight = if (isHighlight) FontWeight.Bold else FontWeight.Normal,
-            fontSize = if (isHighlight) 18.sp else 15.sp,
+            fontSize = fontSizeSp.sp,
             fontFamily = FontFamily.SansSerif,
-            lineHeight = 24.sp,
+            lineHeight = (fontSizeSp + 6).sp,
             modifier = modifier.padding(vertical = 2.dp)
         )
     }
