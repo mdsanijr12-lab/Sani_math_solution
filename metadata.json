@@ -1,0 +1,8 @@
+{
+  "name": "SANI MATH GUIDE",
+  "description": "Smart Bangladeshi guidebook mathematics solver for algebra, arithmetic, geometry, trigonometry, and equations created by SANI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
